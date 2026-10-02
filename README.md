@@ -12,7 +12,7 @@ Google Jobs Scraper is an Apify Actor that extracts job listings from Google Job
 - Price: $2 per 1,000 jobs ($1.50 on paid plans) + $0.03 per search; Apify's free $5 monthly credit covers about 2,000 jobs.
 - Filters for date posted, employment type and remote only — re-checked on every job; non-matching jobs are free.
 - "Only new jobs" mode returns just new postings on scheduled runs (daily job alerts).
-- Verified countries: US, UK, Canada, India, Singapore, South Africa, UAE, Philippines, Malaysia, Nigeria, Pakistan.
+- 26 countries: United States, United Kingdom, Canada, India, Germany, Switzerland, Spain, Italy, Mexico, Brazil, Argentina, Colombia, Peru, Japan, Hong Kong, Singapore, UAE, Saudi Arabia, Qatar, Egypt, South Africa, Nigeria, Ghana, Philippines, Malaysia and Pakistan — dates, salaries and job types parsed in local languages.
 - About a minute for a 100-job search; blocked searches are retried with fresh residential IPs and never charged.
 
 ## Example input
@@ -120,7 +120,7 @@ Yes, within Apify's free plan: its $5 monthly credit covers about 2,000 jobs wit
 Run Google Jobs Scraper on an Apify schedule with "Only new jobs" switched on (and Date posted: since yesterday). Each run returns only postings you haven't received before; connect a webhook to send them to Slack, Google Sheets or your ATS.
 
 **Which countries does Google Jobs Scraper support?**
-It was verified in the United States, United Kingdom, Canada, India, Singapore, South Africa, UAE, the Philippines, Malaysia, Nigeria and Pakistan. Google doesn't offer Google Jobs in Australia, New Zealand or most of Europe.
+It was verified in 26 countries: United States, United Kingdom, Canada, India, Germany, Switzerland, Spain, Italy, Mexico, Brazil, Argentina, Colombia, Peru, Japan, Hong Kong, Singapore, UAE, Saudi Arabia, Qatar, Egypt, South Africa, Nigeria, Ghana, Philippines, Malaysia and Pakistan. Google doesn't offer Google Jobs in Australia, New Zealand, Austria, the Netherlands, Portugal or most other European countries.
 
 ## More from AutomationNation
 
