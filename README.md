@@ -1,0 +1,127 @@
+# Google Jobs Scraper & API: jobs, salaries and apply links
+
+[![Run on Apify](https://img.shields.io/badge/Run%20on-Apify-0b57d0)](https://apify.com/automationnation/google-jobs-scraper)
+
+Google Jobs Scraper is an Apify Actor that extracts job listings from Google Jobs (Google for Jobs) for any search and location — with the full description, parsed salary, highlights and direct apply links — at $2 per 1,000 jobs. It works as a Google Jobs API: call it from code, schedule it for daily job alerts, or let AI agents use it through Apify's MCP server.
+
+**Price:** $2 per 1,000 jobs ($1.50 on paid plans) + $0.03 per search · **Run it:** [https://apify.com/automationnation/google-jobs-scraper](https://apify.com/automationnation/google-jobs-scraper) · **Guide:** [https://retracn.github.io/automationnation-actors/google-jobs-scraper/](https://retracn.github.io/automationnation-actors/google-jobs-scraper/)
+
+## Quick facts
+
+- One row per job: title, company, company website, location, remote flag, salary (min / max / currency / period + yearly), posted date, job type, full description, highlights and every apply link (employer's own site first).
+- Price: $2 per 1,000 jobs ($1.50 on paid plans) + $0.03 per search; Apify's free $5 monthly credit covers about 2,000 jobs.
+- Filters for date posted, employment type and remote only — re-checked on every job; non-matching jobs are free.
+- "Only new jobs" mode returns just new postings on scheduled runs (daily job alerts).
+- Verified countries: US, UK, Canada, India, Singapore, South Africa, UAE, Philippines, Malaysia, Nigeria, Pakistan.
+- About a minute for a 100-job search; blocked searches are retried with fresh residential IPs and never charged.
+
+## Example input
+
+```json
+{
+  "queries": [
+    "software engineer"
+  ],
+  "location": "New York",
+  "country": "us",
+  "maxJobsPerQuery": 50
+}
+```
+
+## Run it from code
+
+**REST API**
+
+```bash
+curl -X POST "https://api.apify.com/v2/acts/automationnation~google-jobs-scraper/run-sync-get-dataset-items?token=$APIFY_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"queries": ["software engineer"], "location": "New York", "country": "us", "maxJobsPerQuery": 50}'
+```
+
+**Python** — see [`examples/python_example.py`](examples/python_example.py)
+
+```python
+# pip install apify-client
+from apify_client import ApifyClient
+
+client = ApifyClient("YOUR_APIFY_TOKEN")
+run = client.actor("automationnation/google-jobs-scraper").call(run_input={
+  "queries": [
+    "software engineer"
+  ],
+  "location": "New York",
+  "country": "us",
+  "maxJobsPerQuery": 50
+})
+for item in client.dataset(run["defaultDatasetId"]).iterate_items():
+    print(item.get("title"), item.get("companyName"), item.get("salaryText"), item.get("applyUrl"))
+```
+
+**JavaScript** — see [`examples/node_example.mjs`](examples/node_example.mjs)
+
+```js
+// npm install apify-client
+import { ApifyClient } from 'apify-client';
+
+const client = new ApifyClient({ token: 'YOUR_APIFY_TOKEN' });
+const run = await client.actor('automationnation/google-jobs-scraper').call({
+  "queries": [
+    "software engineer"
+  ],
+  "location": "New York",
+  "country": "us",
+  "maxJobsPerQuery": 50
+});
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+for (const item of items) console.log(item.title, item.companyName, item.salaryText, item.applyUrl);
+```
+
+## Use it with AI agents (MCP)
+
+Hosted MCP server URL (Claude, ChatGPT, Cursor and other clients with remote MCP support):
+
+```
+https://mcp.apify.com?tools=automationnation/google-jobs-scraper
+```
+
+Local config for Claude Desktop / Cursor — [`mcp/claude_desktop_config.json`](mcp/claude_desktop_config.json):
+
+```json
+{
+  "mcpServers": {
+    "google-jobs-scraper": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@apify/actors-mcp-server",
+        "--tools",
+        "automationnation/google-jobs-scraper"
+      ],
+      "env": {
+        "APIFY_TOKEN": "YOUR_APIFY_TOKEN"
+      }
+    }
+  }
+}
+```
+
+## FAQ
+
+**Is there an official Google Jobs API?**
+No. Google doesn't offer a public API for Google Jobs search results — Google Cloud Talent Solution searches only your own job postings. Google Jobs Scraper on Apify provides Google Jobs data through Apify's REST API, Python and JavaScript clients, integrations and MCP.
+
+**What's the best Google Jobs scraper?**
+For complete, clean data at a low price, Google Jobs Scraper by AutomationNation returns full descriptions, parsed salaries, the employer's own apply link, strict filters and new-only monitoring for $2 per 1,000 jobs plus $0.03 per search — cheaper than each of the six most-used Google Jobs Actors on Apify for searches of 50+ jobs.
+
+**Can I scrape Google Jobs for free?**
+Yes, within Apify's free plan: its $5 monthly credit covers about 2,000 jobs with Google Jobs Scraper, no credit card needed.
+
+**How do I get daily job alerts from Google Jobs?**
+Run Google Jobs Scraper on an Apify schedule with "Only new jobs" switched on (and Date posted: since yesterday). Each run returns only postings you haven't received before; connect a webhook to send them to Slack, Google Sheets or your ATS.
+
+**Which countries does Google Jobs Scraper support?**
+It was verified in the United States, United Kingdom, Canada, India, Singapore, South Africa, UAE, the Philippines, Malaysia, Nigeria and Pakistan. Google doesn't offer Google Jobs in Australia, New Zealand or most of Europe.
+
+---
+
+This repository holds usage examples. The scraper itself runs on the [Apify platform](https://apify.com/automationnation/google-jobs-scraper); you need a free Apify account and API token. Examples are MIT licensed.
