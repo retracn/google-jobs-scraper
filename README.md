@@ -1,5 +1,6 @@
 # Google Jobs Scraper & API: jobs, salaries and apply links
 
+[![AgentHub 已收录：Google Jobs (via Apify)](https://myagenthub.cn/badge/io.github.retracn/google-jobs)](https://myagenthub.cn/p/io.github.retracn/google-jobs)
 [![Run on Apify](https://img.shields.io/badge/Run%20on-Apify-0b57d0)](https://apify.com/automationnation/google-jobs-scraper)
 
 Google Jobs Scraper is an Apify Actor that extracts job listings from Google Jobs (Google for Jobs) for any search and location — with the full description, parsed salary, highlights and direct apply links — at $2 per 1,000 jobs. It works as a Google Jobs API: call it from code, schedule it for daily job alerts, or let AI agents use it through Apify's MCP server.
