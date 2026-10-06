@@ -14,6 +14,7 @@ Google Jobs Scraper is an Apify Actor that extracts job listings from Google Job
 - "Only new jobs" mode returns just new postings on scheduled runs (daily job alerts).
 - 26 countries: United States, United Kingdom, Canada, India, Germany, Switzerland, Spain, Italy, Mexico, Brazil, Argentina, Colombia, Peru, Japan, Hong Kong, Singapore, UAE, Saudi Arabia, Qatar, Egypt, South Africa, Nigeria, Ghana, Philippines, Malaysia and Pakistan — dates, salaries and job types parsed in local languages.
 - About a minute for a 100-job search; blocked searches are retried with fresh residential IPs and never charged.
+- Using JobSpy? Its README says Google Jobs is currently unavailable. The open-source jobspy-google package (github.com/retracn/jobspy-google) keeps JobSpy's scrape_jobs and DataFrame, runs "google" on this Actor and passes the other sites to JobSpy.
 
 ## Example input
 
