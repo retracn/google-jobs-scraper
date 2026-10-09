@@ -29,6 +29,16 @@ Google Jobs Scraper is an Apify Actor that extracts job listings from Google Job
 }
 ```
 
+## Daily job alerts (only new jobs)
+
+Schedule a search with `"onlyNewJobs": true`: each run returns only jobs not returned for the same search before (remembered for 120 days), and you pay only for those.
+
+```json
+{ "queries": ["python developer"], "location": "United States", "country": "us", "datePosted": "3days", "remoteOnly": true, "onlyNewJobs": true }
+```
+
+Ready-made: [n8n workflow: new jobs to Slack](https://github.com/retracn/n8n-apify-templates/blob/main/new-google-jobs-to-slack.json) · [guide: Google Jobs alerts](https://retracn.github.io/automationnation-actors/guides/google-jobs-alerts/) · [public task: data analyst jobs in London, daily](https://apify.com/automationnation/google-jobs-scraper/tasks/daily-job-alerts-data-analyst-london)
+
 ## Run it from code
 
 **REST API**
